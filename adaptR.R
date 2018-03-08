@@ -12,12 +12,12 @@ run_sim <- function(gen=100,p=0.5,W=fitness,nPop=2,m=0,stats=c("p","Fst"),Uab=0,
       Wab <- W$AB[1]
       Wbb <- W$BB[1]
       n <- W$n[1]
-    } else if(i>W$end_gen[1] & i<=W$end_gen[2]){
+    } else if(i>W$gen[1] & i<=W$end_gen[2]){
       Waa <- W$AA[2]
       Wab <- W$AB[2]
       Wbb <- W$BB[2]
       n <- W$n[2]
-    } else {
+    } else if(i>W$end_gen[2] & i<=W$end_gen[3]){
       Waa <- W$AA[3]
       Wab <- W$AB[3]
       Wbb <- W$BB[3]

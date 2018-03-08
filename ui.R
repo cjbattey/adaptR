@@ -14,7 +14,15 @@ shinyUI(fluidPage(
     column(9,
            #textOutput("test"))),
            plotOutput("plot"))),
-  fluidRow(column(4,""),
+  fluidRow(column(4,
+                  helpText('adaptR simulates change in the frequency of genetic variants at a single 
+                            site in a diploid genome across multiple populations and time periods. Each row in the 
+                            table to the right represents a different time period, delimited by the vertical red lines
+                            in the graph above. The first three columns represent the relative fitness of each genotype in 
+                            each time period, the "n" column is the population size, and the "gen" column is the number
+                            of generations for that time period. To run a simulation under new parameters, just edit 
+                            the table as desired and hit "go".'),
+                  helpText('Source code for adaptR can be found here: https://github.com/cjbattey/adaptR')),
            column(8,
                   rHandsontableOutput("hot"))
            )
