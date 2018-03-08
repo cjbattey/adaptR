@@ -1,6 +1,6 @@
 library(magrittr);library(ggplot2);library(viridis);library(reshape)
 
-#time-variant selection
+#Wright-Fisher allele frequency simulation with 3-epoch selection & Ne
 run_sim <- function(gen=100,p=0.5,W=fitness,nPop=2,m=0,stats=c("p","Fst"),Uab=0,Uba=0,
                     infinitePop=F,continue=F){
   withProgress(message="simulating populations...",value=0,{
@@ -69,23 +69,13 @@ run_sim <- function(gen=100,p=0.5,W=fitness,nPop=2,m=0,stats=c("p","Fst"),Uab=0,
   allele.freq$Fst[allele.freq$gen == 0] <- NA
   return(allele.freq)
 }
+
 #format for plotting
 meltPlotData <- function(allele.freq.df=allele.freq.df,gen=300,nPop=10,stats="p"){
   df <- melt(allele.freq.df,id.vars = "gen")
   df$dataType <- gsub("[[:digit:]]","",df$variable)
   df <- subset(df,dataType %in% stats)
   return(df)
-}
-
-make_fitness_matrix <- function(aa1,ab1,bb1,n1,ngen1,
-                                aa2,ab2,bb2,n2,ngen2,
-                                aa3,ab3,bb3,n3,ngen3){
- fitness <- data.frame(matrix(c(aa1,ab1,bb1,n1,ngen1,
-                                aa2,ab2,bb2,n2,ngen2+ngen1,
-                                aa3,ab3,bb3,n3,ngen3+ngen2+ngen1),nrow=3,byrow=T))
- colnames(fitness) <- c("AA","AB","BB","n","end_gen")
- fitness$epoch <- 1:3
- return(fitness)
 }
 
 

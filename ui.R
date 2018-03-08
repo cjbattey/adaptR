@@ -1,7 +1,7 @@
 #adaptR shiny UI
 library(magrittr);library(reshape);library(ggplot2);library(rhandsontable)
 shinyUI(fluidPage(
-  titlePanel("adaptR:"),
+  titlePanel("adaptR?"),
   fluidRow(
     column(3,
            numericInput("p","Starting allele frequency A",value=0.1),

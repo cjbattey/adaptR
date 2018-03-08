@@ -23,9 +23,11 @@ output$hot <- renderRHandsontable({
   rhandsontable(fitness()[,-6],useTypes = F)
 })
 
-df <- eventReactive(input$go,ignoreNULL = F,{run_sim(nPop=input$nPop,p=input$p,gen=fitness()$end_gen[3],
-                                                     W=fitness(),infinitePop = input$infinitePop,
-                                                     m=input$m)})
+df <- eventReactive(input$go,
+                    ignoreNULL = F,
+                    {run_sim(nPop=input$nPop,p=input$p,gen=fitness()$end_gen[3],
+                             W=fitness(),infinitePop = input$infinitePop,
+                             m=input$m)})
 df2 <- reactive({meltPlotData(allele.freq.df = df(),
                               stats=input$plotStats,
                               nPop = input$nPop,
@@ -37,8 +39,8 @@ df2 <- reactive({meltPlotData(allele.freq.df = df(),
 a <- eventReactive(input$go,ignoreNULL = F,{
       print(
         ggplot(df2(),aes(x=gen,y=value,col=variable))+
-          facet_wrap(~dataType)+
-          theme_bw()+ylim(0,1)+
+          facet_wrap(~dataType,scales = "free_y")+
+          theme_bw()+
           theme(legend.position="none",
                 panel.grid.minor=element_blank(),
                 axis.text=element_text(size=12),
